@@ -15,5 +15,7 @@ cd moonusb || exit 1
 make LUAVER=5.4
 
 # Install locally (no sudo)
-make LUAVER=5.4 PREFIX="$HOME/.local" install
+sudo make LUAVER=5.4  install
+cd ..
+rm -rf moonusb
 
