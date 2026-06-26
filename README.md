@@ -16,9 +16,10 @@ how to run the included example  client:
 ```
 lua  client.lua
 ```
-the client requires lua5.4+ and luasocket
-
-you can install luasocket with luarocks
+the client requires lua5.4+ and luasocket (installable via luarocks)
+```
+luarocks install luasocket
+```
 
 
 
