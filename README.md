@@ -5,7 +5,7 @@ Currently printLink only  supports  printers with Marlin.
 
 Also please report any bugs.
 
-how to build on raspberry pi os:
+## how to build on raspberry pi os:
 ```
 sudo apt install libserialport-dev
 git clone  https://github.com/cflat-dev/printlink
@@ -19,7 +19,7 @@ how to run the included example  client:
 ```
 lua  client.lua
 ```
-the client requires lua5.4+ and luasocket (installable via luarocks)
+ the client requires lua5.4+ and luasocket (installable via luarocks)
 ```
 luarocks install luasocket
 ```
