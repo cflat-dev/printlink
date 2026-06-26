@@ -12,7 +12,7 @@ cd build/
 cmake ..
 make
 ```
-how to run the included client:
+how to run the included example  client:
 ```
 lua  client.lua
 ```
