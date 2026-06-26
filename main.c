@@ -34,8 +34,8 @@ int main() {
         int client_fd = accept(server_fd, NULL, NULL);
         printf("[host]: Client connected\n");
 
-        char buf[512];
-        char reply[512];
+        char buf[1024];
+        char reply[1024];
 
         while (1) {
             int n = recv(client_fd, buf, sizeof(buf)-1, 0);
