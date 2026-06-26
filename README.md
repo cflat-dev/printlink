@@ -17,6 +17,7 @@ how to run the included client:
 lua  client.lua
 ```
 the client requires lua5.4+ and luasocket
+
 you can install luasocket with luarocks
 
 
@@ -26,5 +27,4 @@ you can install luasocket with luarocks
 2. The server streams printer replies immediately
 3.  the client can send only one gcode line at a time ending with a new line ("\n")
 
-4.  
 
