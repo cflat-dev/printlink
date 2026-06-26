@@ -8,8 +8,8 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(SP REQUIRED libserialport)
 
 add_executable(serialtest main.c
-        libmoon3dp.h
-        libmoon3dp_marlin.c)
+        lib/libprintlink.h
+        lib/libprintlink_marlin.c)
 
 target_include_directories(serialtest PRIVATE ${SP_INCLUDE_DIRS})
 target_link_libraries(serialtest PRIVATE ${SP_LIBRARIES})

@@ -4,7 +4,7 @@
 #include <libserialport.h>
 #include <stdlib.h>
 
-#include "libmoon3dp.h"
+#include "libprintlink.h"
 
 struct printer {
     struct sp_port *port;

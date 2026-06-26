@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "libmoon3dp.h"
+#include "lib/libprintlink.h"
 
 int main(void)
 {
