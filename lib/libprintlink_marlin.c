@@ -10,7 +10,7 @@ struct printer {
     struct sp_port *port;
 };
 
-static char reply_buf[512];
+
 
 static int try_open(struct printer *p, const char *path) {
     if (sp_get_port_by_name(path, &p->port) != SP_OK)
@@ -60,7 +60,7 @@ void send_gcode(printer_t *p, const char *src) {
 
     size_t len = strlen(src);
 
-    // Write the G-code line
+    // Write the Gcode line
     sp_blocking_write(p->port, src, len, 1000);
 
     // Ensure newline is sent
@@ -76,7 +76,7 @@ int get_printer_reply(printer_t *p,char *buf,size_t buf_len) {
     if (n < 0)
         return -1;
 
-    buf[n] = '\0';  // null terminate
+    buf[n] = '\0';
     return n;
 }
 
