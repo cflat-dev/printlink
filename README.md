@@ -12,8 +12,8 @@ cd build/
 cmake ..
 make
 ```
-##Server protocol
+## Server protocol
 1. the server can only have one client at  a time
 2. The server streams printer replies immediately
-3.  the client can send only one gcode line at a time
+3.  the client can send only one gcode line at a time ending with a new line ("\n")
 
