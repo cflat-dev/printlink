@@ -54,21 +54,32 @@ printer_t *find_printer(void) {
     return NULL;
 }
 
-const char *send_gcode(printer_t *p, const char *src) {
+void send_gcode(printer_t *p, const char *src) {
     if (!p || !p->port)
-        return "ERR no printer";
+        return;
 
     size_t len = strlen(src);
+
+    // Write the G-code line
     sp_blocking_write(p->port, src, len, 1000);
+
+    // Ensure newline is sent
     sp_blocking_write(p->port, "\n", 1, 1000);
-
-    int n = sp_blocking_read(p->port, reply_buf, sizeof(reply_buf)-1, 1000);
-    if (n < 0)
-        return "ERR read";
-
-    reply_buf[n] = 0;
-    return reply_buf;
 }
+
+int get_printer_reply(printer_t *p,char *buf,size_t buf_len) {
+    if (!p || !p->port)
+        return -1;
+
+    int n = sp_blocking_read(p->port, buf, buf_len - 1, 2000);
+
+    if (n < 0)
+        return -1;
+
+    buf[n] = '\0';  // null terminate
+    return n;
+}
+
 
 void free_printer(printer_t *p) {
     if (!p) return;

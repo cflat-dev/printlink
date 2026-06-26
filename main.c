@@ -7,6 +7,7 @@
 
 #define PORT 9000
 
+
 int main() {
     printer_t *p = NULL;
 
@@ -26,7 +27,7 @@ int main() {
     bind(server_fd, (struct sockaddr*)&addr, sizeof(addr));
     listen(server_fd, 1);
 
-    printf("[host]: Server listening on port %d\n", PORT);
+    printf("[host]: G-code streamer listening on port %d\n", PORT);
 
     while (1) {
         printf("[host]: Waiting for a client...\n");
@@ -34,6 +35,7 @@ int main() {
         printf("[host]: Client connected\n");
 
         char buf[512];
+        char reply[512];
 
         while (1) {
             int n = recv(client_fd, buf, sizeof(buf)-1, 0);
@@ -45,10 +47,17 @@ int main() {
             buf[n] = '\0';
             printf("[host]: Gcode: %s", buf);
 
-            char *response = send_gcode(p, buf);
+            // Send to printer
+            send_gcode(p, buf);
 
-            // send printer response back
-            send(client_fd, response, strlen(response), 0);
+            // Get printer reply
+            int rn = get_printer_reply(p, reply, sizeof(reply));
+            if (rn <= 0) {
+                strcpy(reply, "ERR\n");
+            }
+
+            // Stream reply back to client
+            send(client_fd, reply, strlen(reply), 0);
         }
 
         close(client_fd);
