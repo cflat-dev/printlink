@@ -34,18 +34,21 @@ int main() {
         printf("[host]: Client connected\n");
 
         char buf[512];
-        int n = recv(client_fd, buf, sizeof(buf)-1, 0);
 
-        if (n > 0) {
-            buf[n] = '\0'; // ensure null-terminated for safety
+        while (1) {
+            int n = recv(client_fd, buf, sizeof(buf)-1, 0);
+            if (n <= 0) {
+                printf("[host]: Client disconnected\n");
+                break;
+            }
+
+            buf[n] = '\0';
             printf("[host]: Gcode: %s", buf);
 
             char *response = send_gcode(p, buf);
 
-            // send WITHOUT null terminator
+            // send printer response back
             send(client_fd, response, strlen(response), 0);
-        } else {
-            printf("[host]: Client disconnected without sending data\n");
         }
 
         close(client_fd);
